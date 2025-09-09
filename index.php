@@ -1,6 +1,11 @@
 <?php
 
+
+class cat {
+    use Colorful;
+}
 class Box {
+    use Colorful;
     private $width;
     protected $heigth;
     private $length;
@@ -49,6 +54,17 @@ class MetalBox extends box {
 
     public function mass(){
         return $this->volume() * $this->massPerUnit;
+    }
+}
+
+trait Colorful {
+    private $color;
+
+    public function setColor($color){
+        $this->color = $color;
+    }
+    public function getColor(){
+        return $this->color;
     }
 }
 
