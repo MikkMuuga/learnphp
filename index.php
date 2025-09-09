@@ -4,12 +4,21 @@ class Box {
     private $width;
     protected $heigth;
     private $length;
+
+        public static $count = 0;
+
+         public static function test(){
+            //var_dump($this -> width);
+            var_dump(static::class);
+         }
     
     public function __construct($w=0, $h=0, $l=0)
     {   
+        self::$count++;
         $this->width = $w;
         $this->heigth = $h;
         $this->length = $l;
+
     }
 
     public function getWidth(){
@@ -44,9 +53,17 @@ class MetalBox extends box {
 }
 
 $metalBox = new Box(2,3,4);
+
+$box2 = new Box(5,6,7);
+box::test();
+MetalBox::test();
+var_dump(Box::$count, Box::$count);
+
+
+//$box2 = new Box(5,6,7);
+//var_dump($metalBox::$count, $box2::$count);
 //$metalBox->width = 'cool value';
 $metalbox->setWidth(12);
-
 //$metalBox->width = 123;
 //$metalBox -> changeWidth();
 //var_dump($metalBox->width);
