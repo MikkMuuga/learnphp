@@ -1,2 +1,3 @@
 start localhost with php
-```php -S localhost:8000```
+
+sh server.sh
