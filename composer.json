@@ -1,7 +1,8 @@
 {
-    "name": "kaspar.martin.suursa/learnphp",
+    "name": "grego/learnphp",
+    "description": "ye",
     "type": "project",
-    "license": "WTFPL",
+    "license": "wtfpl",
     "autoload": {
         "psr-4": {
             "App\\": "src/"
@@ -9,11 +10,9 @@
     },
     "authors": [
         {
-            "name": "Kaspar Martin Suursalu",
-            "email": "kasparsu@gmail.com"
+            "name": "MikkMuuga",
+            "email": "gregormikk@gmail.com"
         }
     ],
-    "require": {
-        "symfony/var-dumper": "^7.3"
-    }
+    "require": {}
 }

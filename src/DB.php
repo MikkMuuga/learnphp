@@ -12,12 +12,45 @@ class DB
     public function __construct()
     {
         try {
-            $this->conn = new PDO("sqlite:db.sqlite");
+
+            if (!in_array('sqlite', PDO::getAvailableDrivers())) {
+                die('SQLite PDO driver not enabled. Please enable pdo_sqlite in php.ini');
+            }
+            
+            $dbPath = __DIR__ . '/../db.sqlite';
+
+            if (!file_exists($dbPath)) {
+                $this->createDatabase($dbPath);
+            }
+            
+            $this->conn = new PDO("sqlite:$dbPath");
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            die('Database connection failed: ' . $e->getMessage() . 
+                '<br>Please ensure pdo_sqlite extension is enabled in php.ini');
         }
+    }
+
+    private function createDatabase($dbPath)
+    {
+        touch($dbPath);
+        
+        $conn = new PDO("sqlite:$dbPath");
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $conn->exec("CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL
+        )");
+
+        $conn->exec("CREATE TABLE IF NOT EXISTS posts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            body TEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )");
     }
 
     public function all($table, $class)
