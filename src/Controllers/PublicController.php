@@ -10,13 +10,13 @@ class PublicController
             [
                 'title' => 'World news 1',
                 'published' => '16.09.2025',
-                'author' => 'Kaspar',
+                'author' => 'Mikk',
                 'body' => 'Some world news body 1'
             ],
             [
                 'title' => 'World news 2',
                 'published' => '15.09.2025',
-                'author' => 'Martin',
+                'author' => 'Muuga',
                 'body' => 'Some world news body 2'
             ],
             [
