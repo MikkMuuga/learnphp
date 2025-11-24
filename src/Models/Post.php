@@ -8,4 +8,5 @@ class Post extends Model {
     public $id;
     public $title;
     public $body;
+    public $user_id;
 }

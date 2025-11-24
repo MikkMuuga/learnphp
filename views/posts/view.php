@@ -11,6 +11,10 @@
                 <td><?=$post->title?></td>
             </tr>
             <tr>
+                <th>Author</th>
+                <td><?= $post->author->email ?? '-' ?></td>
+            </tr>
+            <tr>
                 <th>Content</th>
                 <td><?=$post->body?></td>
             </tr>

@@ -24,8 +24,8 @@ class DB
             }
             
             $this->conn = new PDO("sqlite:$dbPath");
-            // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->ensurePostsUserId();
         } catch (PDOException $e) {
             die('Database connection failed: ' . $e->getMessage() . 
                 '<br>Please ensure pdo_sqlite extension is enabled in php.ini');
@@ -49,15 +49,34 @@ class DB
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
             body TEXT,
+            user_id INTEGER,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )");
+    }
+
+    private function ensurePostsUserId()
+    {
+        try {
+            $stmt = $this->conn->query("PRAGMA table_info(posts)");
+            $columns = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $hasUserId = false;
+            foreach ($columns as $col) {
+                if (isset($col['name']) && $col['name'] === 'user_id') {
+                    $hasUserId = true;
+                    break;
+                }
+            }
+            if (!$hasUserId) {
+                $this->conn->exec("ALTER TABLE posts ADD COLUMN user_id INTEGER");
+            }
+        } catch (PDOException $e) {
+        }
     }
 
     public function all($table, $class)
     {
         $stmt = $this->conn->prepare("SELECT * FROM $table");
         $stmt->execute();
-        // set the resulting array to associative
         $stmt->setFetchMode(PDO::FETCH_CLASS, $class);
         return $stmt->fetchAll();
     }
@@ -66,7 +85,6 @@ class DB
     {
         $stmt = $this->conn->prepare("SELECT * FROM $table WHERE $field='$value'");
         $stmt->execute();
-        // set the resulting array to associative
         $stmt->setFetchMode(PDO::FETCH_CLASS, $class);
         return $stmt->fetchAll();
     }
@@ -75,7 +93,6 @@ class DB
     {
         $stmt = $this->conn->prepare("SELECT * FROM $table WHERE id=$id");
         $stmt->execute();
-        // set the resulting array to associative
         $stmt->setFetchMode(PDO::FETCH_CLASS, $class);
         return $stmt->fetch();
     }
@@ -89,7 +106,6 @@ class DB
 
         $sql = "INSERT INTO $table ($fieldNamesText)
                 VALUES ('$fieldValuesText')";
-        // use exec() because no results are returned
         $this->conn->exec($sql);
     }
 
@@ -100,17 +116,16 @@ class DB
         }
         $updateText = substr($updateText, 0, -2);
         $sql = "UPDATE $table SET $updateText WHERE id=$id";
-        // Prepare statement
         $stmt = $this->conn->prepare($sql);
 
-        // execute the query
+
         $stmt->execute();
     }
     
     public function delete($table, $id) {
         $sql = "DELETE FROM $table WHERE id=$id";
 
-        // use exec() because no results are returned
+
         $this->conn->exec($sql);
     }
 }

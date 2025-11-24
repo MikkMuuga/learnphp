@@ -19,10 +19,10 @@ Router::get('/posts/edit', [PostsController::class, 'edit']);
 Router::post('/posts/edit', [PostsController::class, 'update']);
 Router::get('/posts/delete', [PostsController::class, 'destroy']);
 
-Router::get('/users', [AuthController::class, 'users']);
-Router::get('/users/edit', [AuthController::class, 'editUser']);
-Router::post('/users/edit', [AuthController::class, 'editUser']);
-Router::get('/users/delete', [AuthController::class, 'deleteUser']);
+Router::get('/users', [\App\Controllers\UsersController::class, 'index']);
+Router::get('/users/edit', [\App\Controllers\UsersController::class, 'edit']);
+Router::post('/users/edit', [\App\Controllers\UsersController::class, 'edit']);
+Router::get('/users/delete', [\App\Controllers\UsersController::class, 'delete']);
 
 Router::get('/register', [AuthController::class, 'registerForm']);
 Router::post('/register', [AuthController::class, 'register']);

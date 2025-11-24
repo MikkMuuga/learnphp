@@ -5,6 +5,7 @@
         <thead>
             <th>ID</th>
             <th>Title</th>
+            <th>Author</th>
             <th>Actions</th>
         </thead>
         <tbody>
@@ -12,6 +13,7 @@
                 <tr>
                     <td><?= $post->id ?></td>
                     <td><?= $post->title ?></td>
+                    <td><?= $post->author->email ?? '-' ?></td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <a class="btn btn-info" href="/posts/view?id=<?=$post->id?>">View</a>
