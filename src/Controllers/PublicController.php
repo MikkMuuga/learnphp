@@ -40,7 +40,7 @@ class PublicController
             [
                 'title' => 'U.S news 1',
                 'published' => '16.09.2025',
-                'author' => 'Kaspar',
+                'author' => 'Mikk',
                 'body' => 'Some U.S news body 1'
             ],
             [

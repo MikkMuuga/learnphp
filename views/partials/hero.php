@@ -1,5 +1,5 @@
 <?php 
-    $name = 'Kaspar';
+    $name = 'Mikk';
 ?>
       
       <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">

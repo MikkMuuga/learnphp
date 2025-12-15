@@ -1,13 +1,29 @@
 <?php include __DIR__ . '/../partials/header.php'; ?>
-<main class="container">
-    <form action="/login" method="POST">
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input name="email" type="email" class="form-control" id="email" placeholder="Email">
+<main class="container mx-auto px-4 py-8">
+    <form action="/login" method="POST" class="space-y-4">
+        <div class="form-control w-full">
+            <label for="email" class="label">
+                <span class="label-text">Email</span>
+            </label>
+            <input 
+                name="email" 
+                type="email" 
+                class="input input-bordered w-full" 
+                id="email" 
+                placeholder="Email"
+            >
         </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+        <div class="form-control w-full">
+            <label for="password" class="label">
+                <span class="label-text">Password</span>
+            </label>
+            <input 
+                name="password" 
+                type="password" 
+                class="input input-bordered w-full" 
+                id="password" 
+                placeholder="Password"
+            >
         </div>
         <button class="btn btn-primary">Login</button>
     </form>
