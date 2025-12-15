@@ -20,9 +20,12 @@ Router::post('/posts/edit', [PostsController::class, 'update']);
 Router::get('/posts/delete', [PostsController::class, 'destroy']);
 
 Router::get('/users', [\App\Controllers\UsersController::class, 'index']);
+Router::get('/users/create', [\App\Controllers\UsersController::class, 'create']);
+Router::post('/users', [\App\Controllers\UsersController::class, 'store']);
+Router::get('/users/view', [\App\Controllers\UsersController::class, 'view']);
 Router::get('/users/edit', [\App\Controllers\UsersController::class, 'edit']);
-Router::post('/users/edit', [\App\Controllers\UsersController::class, 'edit']);
-Router::get('/users/delete', [\App\Controllers\UsersController::class, 'delete']);
+Router::post('/users/edit', [\App\Controllers\UsersController::class, 'update']);
+Router::get('/users/delete', [\App\Controllers\UsersController::class, 'destroy']);
 
 Router::get('/register', [AuthController::class, 'registerForm']);
 Router::post('/register', [AuthController::class, 'register']);
